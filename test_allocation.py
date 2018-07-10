@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 r = [{'camp': '1', 'conversion': 10, 'hour': 1, 'spend': 100},
  {'camp': '1', 'conversion': 10, 'hour': 2, 'spend': 100},
  {'camp': '1', 'conversion': 10, 'hour': 3, 'spend': 15},
@@ -25,7 +24,8 @@ camp_df = df.groupby('camp').agg({"conversion":sum, "spend":sum}).reset_index()
 
 camp_df['convspend_ratio'] = camp_df.conversion / camp_df.spend
 
-
 camp_df['pct_spend_to_allocate'] = camp_df.convspend_ratio / sum(camp_df.convspend_ratio) * 100
+
+camp_df['spend_allocation'] = total_spend * (camp_df.pct_spend_to_allocate/100)
 
 print(camp_df)
